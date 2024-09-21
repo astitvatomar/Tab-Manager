@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Tab Manager - Remove Duplicates & Group by Domain",
+  "version": "1.0",
+  "description": "A Chrome extension to remove duplicate tabs and group tabs by domain.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Manage Tabs"
+  },
+  "permissions": ["tabs"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "128": "logo.png"
+  }
+}
