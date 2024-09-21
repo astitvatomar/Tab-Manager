@@ -37,38 +37,11 @@ function groupTabsByDomain() {
   });
 }
 
-// Function to discard inactive tabs (Memory Optimization)
-function optimizeMemoryUsage() {
-  chrome.tabs.query({ discarded: false }, function (tabs) {
-    tabs.forEach(tab => {
-      // Discard tabs that have been inactive for over 5 minutes (300,000 ms)
-      if (Date.now() - tab.lastAccessed > 300000) {
-        chrome.tabs.discard(tab.id);
-      }
-    });
-  });
-}
-
-// Function to rename a tab (Custom Tab Renaming)
-function renameTab(tabId, newTitle) {
-  chrome.scripting.executeScript({
-    target: { tabId: tabId },
-    func: (newTitle) => {
-      document.title = newTitle;
-    },
-    args: [newTitle]
-  });
-}
-
 // Listen for messages from popup
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === "removeDuplicates") {
     removeDuplicateTabs();
   } else if (message.action === "groupByDomain") {
     groupTabsByDomain();
-  } else if (message.action === "optimizeMemory") {
-    optimizeMemoryUsage();
-  } else if (message.action === "renameTab") {
-    renameTab(message.tabId, message.newTitle);
   }
 });
