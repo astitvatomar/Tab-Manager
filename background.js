@@ -2,7 +2,7 @@
 function removeDuplicateTabs() {
   chrome.tabs.query({}, function (tabs) {
     const uniqueUrls = new Set();
-    tabs.forEach(tab => {
+    tabs.forEach((tab) => {
       if (uniqueUrls.has(tab.url)) {
         chrome.tabs.remove(tab.id);
       } else {
@@ -17,7 +17,7 @@ function groupTabsByDomain() {
   chrome.tabs.query({}, function (tabs) {
     const domainGroups = {};
 
-    tabs.forEach(tab => {
+    tabs.forEach((tab) => {
       const url = new URL(tab.url);
       const domain = url.hostname;
 
@@ -27,12 +27,15 @@ function groupTabsByDomain() {
       domainGroups[domain].push(tab);
     });
 
-    Object.values(domainGroups).forEach(group => {
+    Object.values(domainGroups).forEach((group) => {
       const firstTab = group[0];
-      const tabIds = group.map(tab => tab.id);
+      const tabIds = group.map((tab) => tab.id);
 
       // Group all tabs under the first tab
-      chrome.tabs.group({ tabIds, createProperties: { windowId: firstTab.windowId } });
+      chrome.tabs.group({
+        tabIds,
+        createProperties: { windowId: firstTab.windowId },
+      });
     });
   });
 }
