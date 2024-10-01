@@ -34,6 +34,7 @@ A Chrome extension designed to improve tab management by removing duplicate tabs
 **Astitva Pratap Singh Tomar**
 
 Linkedin - https://www.linkedin.com/in/astitva-pratap-singh-tomar/
+
 Instagram - https://www.instagram.com/tomar_astitva/
 
 ## Technologies Used
